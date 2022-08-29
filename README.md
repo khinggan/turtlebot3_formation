@@ -1,2 +1,2 @@
 # turtlebot3_formation
-Leader-follower formation control using ROS+Gazebo
+Leader-follower formation control using ROS+Gazebo.
