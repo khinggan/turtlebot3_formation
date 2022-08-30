@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
     follower_vel = rospy.Publisher(follower_robot_name + '/cmd_vel', Twist, queue_size=1)
 
-    rate = rospy.Rate(10.0)
+    rate = rospy.Rate(50.0)
 
     # dynamic_reconfigure
     srv = Server(tf_pidConfig, pid_cb)

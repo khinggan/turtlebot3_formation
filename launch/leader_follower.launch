@@ -12,20 +12,20 @@
   <arg name="first_tb3_z_pos" default="0.0"/>
   <arg name="first_tb3_yaw"   default="0.0"/>
 
-  <arg name="second_tb3_x_pos" default="-0.5"/>
+  <arg name="second_tb3_x_pos" default="-1"/>
   <arg name="second_tb3_y_pos" default=" 0"/>
   <arg name="second_tb3_z_pos" default=" 0"/>
-  <arg name="second_tb3_yaw"   default=" 0"/>
+  <arg name="second_tb3_yaw"   default=" -3.1415926"/>
 
-  <arg name="third_tb3_x_pos" default=" -0.5"/>
-  <arg name="third_tb3_y_pos" default=" -0.5"/>
+  <arg name="third_tb3_x_pos" default=" -1"/>
+  <arg name="third_tb3_y_pos" default=" -1"/>
   <arg name="third_tb3_z_pos" default=" 0.0"/>
-  <arg name="third_tb3_yaw"   default=" 0.0"/>
+  <arg name="third_tb3_yaw"   default=" -2.35619445"/>
 
   <arg name="forth_tb3_x_pos" default=" 0"/>
-  <arg name="forth_tb3_y_pos" default=" -0.5"/>
+  <arg name="forth_tb3_y_pos" default=" -1"/>
   <arg name="forth_tb3_z_pos" default=" 0.0"/>
-  <arg name="forth_tb3_yaw"   default=" 0.0"/>
+  <arg name="forth_tb3_yaw"   default=" -1.5707963"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/empty.world"/>
@@ -97,10 +97,10 @@
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg forth_tb3) -x $(arg forth_tb3_x_pos) -y $(arg forth_tb3_y_pos) -z $(arg forth_tb3_z_pos) -Y $(arg forth_tb3_yaw) -param robot_description" />
   </group>
 
-  <node pkg="tf" type="static_transform_publisher" name="world_to_odom_1" args="0 0 0 0 0 0 world $(arg first_tb3)/odom 20" />
-  <node pkg="tf" type="static_transform_publisher" name="world_to_odom_2" args="0 0 0 0 0 0 world $(arg second_tb3)/odom 20" />
-  <node pkg="tf" type="static_transform_publisher" name="world_to_odom_3" args="0 0 0 0 0 0 world $(arg third_tb3)/odom 20" />
-  <node pkg="tf" type="static_transform_publisher" name="world_to_odom_4" args="0 0 0 0 0 0 world $(arg forth_tb3)/odom 20" />
+  <node pkg="tf" type="static_transform_publisher" name="world_to_odom_1" args="0 0 0 0 0 0 world $(arg first_tb3)/odom 50" />
+  <node pkg="tf" type="static_transform_publisher" name="world_to_odom_2" args="0 0 0 0 0 0 world $(arg second_tb3)/odom 50" />
+  <node pkg="tf" type="static_transform_publisher" name="world_to_odom_3" args="0 0 0 0 0 0 world $(arg third_tb3)/odom 50" />
+  <node pkg="tf" type="static_transform_publisher" name="world_to_odom_4" args="0 0 0 0 0 0 world $(arg forth_tb3)/odom 50" />
 
   <!-- <node pkg="tf" type="static_transform_publisher" name="odom_to_base_footprint_1" args="0 0 0 0 0 0 $(arg first_tb3)/odom $(arg first_tb3)/base_footprint 20" />
   <node pkg="tf" type="static_transform_publisher" name="odom_to_base_footprint_2" args="0 0 0 0 0 0 $(arg second_tb3)/odom $(arg second_tb3)/base_footprint 20" />
@@ -112,31 +112,31 @@
   <node pkg="tf" type="static_transform_publisher" name="base_footprint_3_to_base_link_3" args="0 0 0 0 0 0 $(arg third_tb3)/base_footprint $(arg third_tb3)/base_link 20" />
   <node pkg="tf" type="static_transform_publisher" name="base_footprint_4_to_base_link_4" args="0 0 0 0 0 0 $(arg forth_tb3)/base_footprint $(arg forth_tb3)/base_link 20" /> -->
 
-  <node pkg="tf" type="static_transform_publisher" name="robot_2_front" args="$(arg front_distance) 0 0 0 0 0 $(arg second_tb3)/base_link $(arg second_tb3)/base_scan 20" />
-  <node pkg="tf" type="static_transform_publisher" name="robot_3_front" args="$(arg front_distance) 0 0 0 0 0 $(arg third_tb3)/base_link $(arg third_tb3)/base_scan 20" />
-  <node pkg="tf" type="static_transform_publisher" name="robot_4_front" args="$(arg front_distance) 0 0 0 0 0 $(arg forth_tb3)/base_link $(arg forth_tb3)/base_scan 20" />
+  <node pkg="tf" type="static_transform_publisher" name="robot_2_front" args="$(arg front_distance) 0 0 0 0 0 $(arg second_tb3)/base_link $(arg second_tb3)/base_scan 50" />
+  <node pkg="tf" type="static_transform_publisher" name="robot_3_front" args="$(arg front_distance) 0 0 0 0 0 $(arg third_tb3)/base_link $(arg third_tb3)/base_scan 50" />
+  <node pkg="tf" type="static_transform_publisher" name="robot_4_front" args="$(arg front_distance) 0 0 0 0 0 $(arg forth_tb3)/base_link $(arg forth_tb3)/base_scan 50" />
 
   <node pkg="turtlebot3_formation" type="leader_follower.py" name="robot_2_follower" output="screen">
     <param name="leader_robot_name" value="$(arg first_tb3)" />
     <param name="follower_robot_name" value="$(arg second_tb3)" />
-    <param name="expected_distance" value="0.5" />
-    <param name="expected_theta" value="$(eval 3.14159)" />
+    <param name="expected_distance" value="1" />
+    <param name="expected_theta" value="$(eval -3.1415926)" />
     <param name="front_distance" value="$(arg front_distance)" />
   </node>
 
   <node pkg="turtlebot3_formation" type="leader_follower.py" name="robot_3_follower" output="screen">
     <param name="leader_robot_name" value="$(arg first_tb3)" />
     <param name="follower_robot_name" value="$(arg third_tb3)" />
-    <param name="expected_distance" value="0.5" />
-    <param name="expected_theta" value="$(eval -3.14159 * 3/4)" />
+    <param name="expected_distance" value="1.41421" />
+    <param name="expected_theta" value="$(eval -3.1415926 * 3/4)" />
     <param name="front_distance" value="$(arg front_distance)" />
   </node>
 
   <node pkg="turtlebot3_formation" type="leader_follower.py" name="robot_4_follower" output="screen">
     <param name="leader_robot_name" value="$(arg first_tb3)" />
     <param name="follower_robot_name" value="$(arg forth_tb3)" />
-    <param name="expected_distance" value="0.5" />
-    <param name="expected_theta" value="$(eval -3.14159 * 1/2)" />
+    <param name="expected_distance" value="1" />
+    <param name="expected_theta" value="$(eval -3.1415926 * 1/2)" />
     <param name="front_distance" value="$(arg front_distance)" />
   </node>
 </launch>
