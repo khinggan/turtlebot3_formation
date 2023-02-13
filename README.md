@@ -29,7 +29,7 @@ $ source devel/setup.bash
 
 4. run
 ```console
-$ roslaunch turtlebot3_formation leader_follower.py
+$ roslaunch turtlebot3_formation leader_follower.launch
 ```
 
 5. test (another terminal)
