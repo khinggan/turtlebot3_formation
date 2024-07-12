@@ -7,7 +7,7 @@ Multi-Robot Formation Control Algorithm Implementation Using ROS (Noetic), Gazeb
 ![System image](include/four_tb3_formation.png "4 Turtlebot3 formation control in Gazebo")
 
 ## Getting Started
-
+Simulator
 ```bash
 # 1. Create a ROS workspace;replace <workspace_name> with your own workspace name.
 $ mkdir <workspace_name>/src
@@ -29,7 +29,21 @@ $ roslaunch turtlebot3_formation leader_follower.launch
 # 5. Drive robot 1
 $ rostopic pub -r 10 /tb3_1/cmd_vel geometry_msgs/Twist "{linear:  {x: 0.2, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0, z: 0.1}}"
 ```
+Real Robot
 
+1. Create a new launch file in `turtlebot3_bringup/launch` named `multi_turtlebot3_robot.launch` with following content.
+2. cd `<workspace_dir>`
+3. `catkin_make`
+```xml
+<launch>
+    <!-- Launch TurtleBot3 #1 -->
+    <group ns="tb3_1">
+        <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch">
+            <arg name="multi_robot_name" value="tb3_1"/>
+        </include>
+    </group>
+</launch>
+```
 ## Reference
 [1]. [abc_swarm doc](https://abc-swarm.readthedocs.io/en/latest/index.html). 
 
