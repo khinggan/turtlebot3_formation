@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-<<<<<<< HEAD
-project(turtblebot3_formation)
-=======
 project(turtlebot3_formation)
->>>>>>> init
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
